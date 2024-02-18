@@ -1,0 +1,72 @@
+import java.util.*;
+
+class employee {
+  public static void main(String[] args){
+    Scanner scn = new Scanner(System.in);
+    Thread t = Thread.currentThread(); 
+    employee[] arr;
+    System.out.println("How many Record Do You Want To Enter :: ");
+    int num = scn.nextInt();
+    arr = new employee[num];
+    try{
+      for(int i=0;i<arr.length;i++){
+        arr[i] = new employee();
+        System.out.println("Employee data :: "+(i+1));
+        arr[i].employeeData();
+        arr[i].agecheck();
+      }
+      for(int i=0;i<arr.length;i++){
+        employee temp;
+        for(int j=0;j<arr.length;j++){
+          for(int k=0;k<arr.length-j-1;k++){
+            if(arr[k].salary < arr[k+1].salary){
+              temp = arr[k];
+              arr[k] = arr[k+1];
+              arr[k+1] = temp;
+            }
+          }
+        }
+        arr[i].show();
+        
+      }
+    }
+    catch(handle e){
+      System.out.println("Age Should be More than 18.");
+    }
+  }
+  public int eid;
+  public String ename;
+  public int salary,age;
+  public void employeeData(){
+    Scanner scn = new Scanner(System.in);
+    
+    System.out.print("Enter The Emp ID :: ");
+    eid = scn.nextInt();
+    System.out.print("Enter The Emp Name :: ");
+    ename = scn.next();
+    System.out.print("Enter The Age :: ");
+    age = scn.nextInt();
+    System.out.print("Enter The Salary :: ");
+    salary = scn.nextInt(); 
+  }
+  public void show(){
+    System.out.println(":: Empoyee Data ::");
+    System.out.println("Emp ID :: " + eid);
+    System.out.println("Emp Name :: " + ename);
+    System.out.println("Emp Salary :: " + salary);
+    System.out.println("Emp Age :: " + age);
+  }    
+  public void agecheck() throws handle{
+    if(age < 18){
+      throw new handle();
+    }
+    else{
+      System.out.println("Data are Submitted.");
+    }
+  } 
+}
+
+class handle extends Exception{
+  public handle(){
+  }
+}
